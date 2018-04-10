@@ -98,20 +98,13 @@ public class QuizFragment extends Fragment {
     }
 
     private void checkAnswers(String answer){
+        disableAnswerButtons();
         questionListPosition++;
         if(question.getCorrectAnswer().equals(answer)){
             quizQuestion.setText("correct!!");
             correctAnswers++;
-            answerOneButton.setEnabled(false);
-            answerTwoButton.setEnabled(false);
-            answerThreeButton.setEnabled(false);
-            answerFourButton.setEnabled(false);
         }else{
             quizQuestion.setText(getString(R.string.wrong_answer_text, question.getCorrectAnswer()));
-            answerOneButton.setEnabled(false);
-            answerTwoButton.setEnabled(false);
-            answerThreeButton.setEnabled(false);
-            answerFourButton.setEnabled(false);
         }
 
 
@@ -120,19 +113,24 @@ public class QuizFragment extends Fragment {
 
     @OnClick(R.id.next_button)
     protected   void nextButtonClicked(){
+        enableAnswerButtons();
         if(questionListPosition <= questionsList.size() - 1){
             populateQuizContent();
-            answerOneButton.setEnabled(true);
-            answerTwoButton.setEnabled(true);
-            answerThreeButton.setEnabled(true);
-            answerFourButton.setEnabled(true);
         }else{
             quizCallback.quizFinished(correctAnswers);
-            answerOneButton.setEnabled(true);
-            answerTwoButton.setEnabled(true);
-            answerThreeButton.setEnabled(true);
-            answerFourButton.setEnabled(true);
         }
+    }
+    private void disableAnswerButtons(){
+        answerOneButton.setEnabled(false);
+        answerTwoButton.setEnabled(false);
+        answerThreeButton.setEnabled(false);
+        answerFourButton.setEnabled(false);
+    }
+    private void enableAnswerButtons(){
+        answerOneButton.setEnabled(true);
+        answerTwoButton.setEnabled(true);
+        answerThreeButton.setEnabled(true);
+        answerFourButton.setEnabled(true);
     }
 
     public interface QuizCallBack{

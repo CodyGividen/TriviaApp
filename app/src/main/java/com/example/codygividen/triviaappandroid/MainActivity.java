@@ -1,6 +1,8 @@
 package com.example.codygividen.triviaappandroid;
 
+import android.content.DialogInterface;
 import android.os.Parcelable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,6 +53,22 @@ public class MainActivity extends AppCompatActivity implements QuestionCreatorFr
         if (questionList.isEmpty()) {
             Toast.makeText(this, "There is not a quiz to delete.", Toast.LENGTH_SHORT).show();
         }else{
+            AlertDialog.Builder correctDialog = new AlertDialog.Builder(this);
+            correctDialog.setMessage(R.string.delete_quiz_message).setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    questionList.clear();
+                    dialog.dismiss();
+                    Toast.makeText(MainActivity.this, R.string.delete_quiz_toast_message, Toast.LENGTH_LONG).show();
+                }
+            }).setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = correctDialog.create();
+            dialog.show();
 
         }
 
@@ -65,6 +83,15 @@ public class MainActivity extends AppCompatActivity implements QuestionCreatorFr
 
     @Override
     public void quizFinished(int correctAnswers) {
-
+        getSupportFragmentManager().beginTransaction().remove(quizFragment).commit();
+        AlertDialog.Builder correctDialog = new AlertDialog.Builder(this);
+        correctDialog.setMessage(getString(R.string.correct_questions, correctAnswers)).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = correctDialog.create();
+        dialog.show();
     }
 }

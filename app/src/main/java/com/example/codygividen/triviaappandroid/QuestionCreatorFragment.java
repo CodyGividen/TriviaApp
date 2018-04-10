@@ -15,11 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link QuestionCreatorFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class QuestionCreatorFragment extends Fragment {
     private Callback callback;
 

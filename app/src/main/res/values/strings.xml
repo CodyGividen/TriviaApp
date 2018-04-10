@@ -16,4 +16,10 @@
     <string name="take_quiz">Take Quiz</string>
     <string name="delete_quiz">Delete Quiz</string>
     <string name="wrong_answer_text">Wrong! The correct answer is %1$s !</string>
+    <string name="correct_questions">You got %1$d questions correct!!</string>
+    <string name="ok">ok</string>
+    <string name="yes">yes</string>
+    <string name="no">No</string>
+    <string name="delete_quiz_message">Are you sure you would like to delete this quiz?</string>
+    <string name="delete_quiz_toast_message">Quiz Deleted</string>
 </resources>
